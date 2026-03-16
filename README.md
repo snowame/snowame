@@ -14,3 +14,9 @@ Here are some ideas to get you started:
 - 😄 Pronouns: ...
 - ⚡ Fun fact: ...
 -->
+
+If you want your dreams to live, you have to let them go back to zero first.
+
+夢を叶えるなら、まず、夢を無にしなければいけないのよ
+
+如果要实现梦想的话，首先，必须要让梦境归无才行哦
