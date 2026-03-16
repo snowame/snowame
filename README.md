@@ -15,7 +15,7 @@ Here are some ideas to get you started:
 - ⚡ Fun fact: ...
 -->
 
-If you want your dreams to live, you have to let them go back to zero first.
+If you want to realize your deams, first, you have to let them go back to nothing first
 
 夢を叶えるなら、まず、夢を無にしなければいけないのよ
 
