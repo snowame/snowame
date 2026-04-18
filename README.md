@@ -15,8 +15,4 @@ Here are some ideas to get you started:
 - ⚡ Fun fact: ...
 -->
 
-If you want to realize your deams, first, you have to let them go back to nothing first
-
-夢を叶えるなら、まず、夢を無にしなければいけないのよ
-
-如果要实现梦想的话，首先，必须要让梦境归无才行哦
+带我走吧，无论多远的地方
