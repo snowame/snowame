@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>eden* — おやすみ、シオン</title>
+<meta name="description" content="They were only two, on the planet. 献给 minori《eden*》与诗音的一页。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Serif+JP:wght@300;400;500&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:#4a3a34;                     /* 暖棕 · 正文 */
+    --ink-soft:rgba(74,58,52,.66);
+    --ink-faint:rgba(74,58,52,.42);
+    --rose:#d65a73;                    /* 玫瑰红 · 赤瞳点缀 */
+    --gold:#c0913f;                    /* 琥珀金 · 黄昏 */
+    --halo:rgba(255,253,250,.78);      /* 磨砂白光晕 */
+    --maxw:880px;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+
+  body {
+    font-family:"Noto Serif SC","Noto Serif JP",Georgia,serif;
+    color:var(--ink);
+    background:#f6efe7;
+    line-height:1.85;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ── 整页固定背景:诗音 ─────────────────────────── */
+  .bg {
+    position:fixed; inset:0; z-index:-3;
+    background:url("assets/Shiyin.jpg") center top/cover no-repeat;
+  }
+  /* 暖白柔纱,让明亮的画面成为梦境般的底色,文字得以浮起 */
+  .veil {
+    position:fixed; inset:0; z-index:-2;
+    background:
+      radial-gradient(120% 80% at 50% 0%, rgba(255,255,255,.12), transparent 45%),
+      linear-gradient(180deg,
+        rgba(255,252,248,.40) 0%,
+        rgba(255,250,245,.56) 38%,
+        rgba(255,248,242,.62) 70%,
+        rgba(255,245,238,.50) 100%);
+  }
+  /* 缓缓上浮的光点 / 花瓣 */
+  .motes { position:fixed; inset:0; z-index:-1; pointer-events:none; overflow:hidden; }
+  .motes::before, .motes::after {
+    content:""; position:absolute; inset:-20% -10%;
+    background-image:
+      radial-gradient(5px 5px at 12% 80%, rgba(255,255,255,.9), transparent 60%),
+      radial-gradient(3px 3px at 30% 95%, rgba(255,236,210,.8), transparent 60%),
+      radial-gradient(4px 4px at 55% 88%, rgba(255,255,255,.85), transparent 60%),
+      radial-gradient(3px 3px at 78% 92%, rgba(255,224,228,.8), transparent 60%),
+      radial-gradient(5px 5px at 90% 78%, rgba(255,255,255,.8), transparent 60%);
+    background-repeat:repeat;
+    background-size:auto;
+    animation:rise 22s linear infinite;
+  }
+  .motes::after { animation-duration:34s; opacity:.6; transform:scale(1.4); }
+  @keyframes rise {
+    from { transform:translateY(0); opacity:0; }
+    10%  { opacity:.7; }
+    90%  { opacity:.7; }
+    to   { transform:translateY(-120vh); opacity:0; }
+  }
+
+  /* 顶部阅读进度 */
+  .progress {
+    position:fixed; top:0; left:0; height:2px; width:0; z-index:10;
+    background:linear-gradient(90deg, var(--rose), var(--gold));
+    box-shadow:0 0 8px rgba(214,90,115,.5);
+  }
+
+  /* 文字统一的磨砂光晕,保证落在图上也清晰 */
+  .glow { text-shadow:0 1px 18px var(--halo), 0 0 2px var(--halo); }
+
+  /* ── 首屏 ─────────────────────────────────────── */
+  .hero {
+    position:relative; min-height:100svh;
+    display:flex; flex-direction:column; justify-content:flex-end;
+    align-items:center; text-align:center;
+    padding:0 6vw 18vh;
+  }
+  .kicker {
+    font-family:"Cormorant Garamond",serif;
+    letter-spacing:.5em; text-transform:uppercase;
+    font-size:.74rem; color:var(--ink-soft);
+    margin-bottom:1.2rem; padding-left:.5em;
+  }
+  .hero h1 {
+    font-family:"Cormorant Garamond",serif; font-weight:400;
+    font-size:clamp(3.4rem, 13vw, 6.6rem); line-height:.9; letter-spacing:.02em;
+  }
+  .hero h1 span { color:var(--rose); }
+  .sub-en {
+    font-family:"Cormorant Garamond",serif; font-style:italic;
+    font-size:clamp(1.05rem, 3.4vw, 1.55rem); color:var(--ink);
+    margin-top:1.2rem; letter-spacing:.04em;
+  }
+  .sub-zh {
+    font-weight:300; font-size:clamp(.9rem,2.6vw,1.02rem);
+    color:var(--ink-soft); letter-spacing:.22em; margin-top:.7rem;
+  }
+  .scroll-hint {
+    position:absolute; bottom:3.6vh; left:50%; transform:translateX(-50%);
+    color:var(--ink-soft); font-size:.7rem; letter-spacing:.3em; text-align:center;
+  }
+  .scroll-hint span { display:block; margin-top:.6rem; font-size:1.1rem; animation:drift 2.2s ease-in-out infinite; }
+  @keyframes drift { 0%,100%{transform:translateY(0);opacity:.45} 50%{transform:translateY(7px);opacity:1} }
+
+  /* ── 语录 ─────────────────────────────────────── */
+  .quotes { max-width:var(--maxw); margin:0 auto; padding:0 7vw; }
+  .quote {
+    min-height:84svh;
+    display:flex; flex-direction:column; justify-content:center;
+    padding:12vh 0;
+  }
+  .quote .jp {
+    font-family:"Noto Serif JP",serif; font-weight:500;
+    font-size:clamp(1.5rem, 5vw, 2.6rem); line-height:1.7;
+    letter-spacing:.03em; text-wrap:balance;
+  }
+  .quote .zh {
+    font-weight:400; font-size:clamp(1rem, 3vw, 1.25rem);
+    color:var(--ink-soft); margin-top:1.1rem; letter-spacing:.06em;
+  }
+  .quote .who {
+    display:inline-block; margin-top:1.7rem;
+    font-family:"Cormorant Garamond",serif; font-style:italic; font-weight:400;
+    font-size:1.05rem; letter-spacing:.12em; color:var(--gold);
+  }
+  .quote .who::before { content:"—  "; }
+  .quote .rule { width:46px; height:1.5px; margin-top:2.4rem; background:linear-gradient(90deg, var(--rose), transparent); }
+  .quote.lead .jp { color:#8a5a2b; }   /* 黄昏褐金,作为段落书签 */
+
+  /* reveal */
+  .reveal { opacity:0; transform:translateY(34px); transition:opacity 1.1s ease, transform 1.1s cubic-bezier(.16,.84,.3,1); }
+  .reveal.in { opacity:1; transform:none; }
+
+  /* ── 终章 ─────────────────────────────────────── */
+  .finale {
+    min-height:100svh; display:grid; place-items:center; text-align:center;
+    padding:10vh 7vw;
+    background:radial-gradient(ellipse 130% 90% at 50% 50%, rgba(255,255,255,.30), transparent 62%);
+  }
+  .finale .jp { font-family:"Noto Serif JP",serif; font-size:clamp(2rem, 8vw, 4rem); font-weight:500; color:#8a5a2b; letter-spacing:.1em; }
+  .finale .en { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:clamp(1.1rem,3.6vw,1.5rem); color:var(--ink); margin-top:1.1rem; }
+  .finale .zh { font-weight:300; letter-spacing:.4em; color:var(--ink-soft); margin-top:.9rem; padding-left:.4em; }
+
+  footer {
+    text-align:center; padding:5vh 6vw 7vh;
+    color:var(--ink-soft); font-size:.74rem; letter-spacing:.16em;
+  }
+  footer a { color:var(--gold); text-decoration:none; border-bottom:1px solid var(--ink-faint); }
+  footer a:hover { color:var(--rose); }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior:auto; }
+    .motes::before, .motes::after, .scroll-hint span { animation:none; }
+    .reveal { transition:opacity .4s ease; transform:none; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="progress" id="progress"></div>
+  <div class="bg"></div>
+  <div class="veil"></div>
+  <div class="motes"></div>
+
+  <!-- 首屏 -->
+  <header class="hero">
+    <p class="kicker glow">minori &nbsp;·&nbsp; eden*</p>
+    <h1 class="glow">eden<span>*</span></h1>
+    <p class="sub-en glow">They were only two, on the planet.</p>
+    <p class="sub-zh glow">名为「地球」的星球上，最后的恋爱物语</p>
+    <div class="scroll-hint glow">SCROLL<span>↓</span></div>
+  </header>
+
+  <!-- 语录 -->
+  <main class="quotes">
+
+    <section class="quote lead reveal">
+      <p class="jp glow">これは、地球という名の星で紡がれる、<br>最後の恋の物語。</p>
+      <p class="zh glow">这是在名为「地球」的星球上，编织而成的，最后的恋爱物语。</p>
+      <div class="rule"></div>
+    </section>
+
+    <section class="quote reveal">
+      <p class="jp glow">長い長い時間の中で、私はずっと待っていました。<br>あなたと出会う、この瞬間を。</p>
+      <p class="zh glow">在那漫长的岁月里，我一直都在等待——等待与你相遇的，这一刻。</p>
+      <span class="who glow">シオン</span>
+    </section>
+
+    <section class="quote reveal">
+      <p class="jp glow">私は、神様として生きるために生まれてきたんじゃない。<br>ただの女の子として、あなたを愛するために。</p>
+      <p class="zh glow">我并不是为了被当作神明而活着才出生的。只是想像个普通的女孩那样——去爱你。</p>
+      <span class="who glow">シオン</span>
+    </section>
+
+    <section class="quote reveal">
+      <p class="jp glow">俺はお前をどこへも連れて行かない。<br>お前のいる場所が、俺の行くべき場所だ。</p>
+      <p class="zh glow">我不会带你去任何地方。你所在的地方，就是我该去的地方。</p>
+      <span class="who glow">榛名亮</span>
+    </section>
+
+    <section class="quote reveal">
+      <p class="jp glow">終わりがあるから、<br>今を生きるのが楽しい。</p>
+      <p class="zh glow">正因为有终结，活在「当下」，才如此令人欢喜。</p>
+      <span class="who glow">シオン</span>
+    </section>
+
+    <section class="quote reveal">
+      <p class="jp glow">世界が滅びるその時まで、俺はここにいる。<br>お前の隣に、ずっと。</p>
+      <p class="zh glow">直到世界灭亡的那一刻，我都会在这里。一直，在你的身边。</p>
+      <span class="who glow">榛名亮</span>
+    </section>
+
+    <section class="quote reveal">
+      <p class="jp glow">命に終わりがあっても、私たちが確かに愛し合った<br>という事実は、それだけで永遠になります。</p>
+      <p class="zh glow">就算生命有尽头，只要我们曾真切地相爱过——单凭这个事实，便已成为永恒。</p>
+      <span class="who glow">シオン</span>
+    </section>
+
+    <section class="quote lead reveal">
+      <p class="jp glow">たとえこの星が終わりを迎えようとも、<br>私の願いはもう、十分に満たされています。</p>
+      <p class="zh glow">就算这个星球迎来终结，我的心愿，也已经足够圆满了。</p>
+      <div class="rule"></div>
+    </section>
+
+  </main>
+
+  <!-- 终章 -->
+  <section class="finale reveal">
+    <div>
+      <p class="jp glow">おやすみ、シオン。</p>
+      <p class="en glow">Sweet dreams, Sion.</p>
+      <p class="zh glow">晚安，诗音。</p>
+    </div>
+  </section>
+
+  <footer>
+    <p class="glow">带我走吧，无论多远的地方。</p>
+    <p class="glow" style="margin-top:1rem">eden* © minori &nbsp;·&nbsp; a fan page by
+      <a href="https://github.com/snowame" target="_blank" rel="noopener">snowame</a></p>
+  </footer>
+
+<script>
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    }
+  }, { threshold: 0.25 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  const bar = document.getElementById('progress');
+  const onScroll = () => {
+    const h = document.documentElement;
+    bar.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight || 1) * 100) + '%';
+  };
+  addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+</script>
+</body>
+</html>
